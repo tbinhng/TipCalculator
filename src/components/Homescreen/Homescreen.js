@@ -10,8 +10,8 @@ const styles = StyleSheet.create({
   billamoutline: {
 
   },
-  texttitle: { },
-  billamoutinput: { },
+  texttitle: {},
+  billamoutinput: {},
 });
 
 class Homescreen extends Component {
@@ -33,24 +33,24 @@ class Homescreen extends Component {
   }
 
   handleBillAmoutChange = (bill, index) => {
-    let percent; 
+    var percent;
     this.setState({
       billamout: bill,
-    });   
-    
+    });
+
     bill = parseFloat(bill);
     if (!index && index !== 0) {
-        index = this.selectedIndex;
-    }  
-        console.log(index);
+      index = this.selectedIndex;
+    }
+    console.log(index);
     percent = this.segmentValue()[index];
     percent = parseFloat(percent) / 100;
 
     let billresult = bill + (bill * percent);
 
     this.setState({
-        result: billresult,
-        tipamout: percent,
+      result: billresult,
+      tipamout: percent,
     });
   }
 
@@ -59,34 +59,34 @@ class Homescreen extends Component {
   }
   render() {
     return (
-            <View style={styles.wrapper}>
-                <View style={styles.billamoutline}>
-                    <Text style={styles.texttitle}>Bill Amout:</Text>
-                    <TextInput
-                      style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-                      onChangeText={(billamout) => this.handleBillAmoutChange(billamout)}
-                      keyboardType='numeric'
-                    />
-                </View>
-                <View>
-                    <Text>Tip Amout:</Text>
-                </View>
-                <View>
-                    <SegmentedControlTab
-                      values={this.segmentValue()}
-                      selectedIndex={this.state.selectedIndex}
-                      onTabPress={this.handleIndexChange}
-                    />
-                </View>
-                <View>
-                    <Text>Bill Amout: {this.state.billamout}</Text>
-                    <Text>Tip Amout: {this.index}</Text>
-                    <Text>Percent Amout: {this.state.tipamout}</Text>
-                </View>
-                <View>
-                    <Text>Result: {this.state.result}</Text>
-                </View>
-            </View>
+      <View style={styles.wrapper}>
+        <View style={styles.billamoutline}>
+          <Text style={styles.texttitle}>Bill Amout:</Text>
+          <TextInput
+            style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
+            onChangeText={(billamout) => this.handleBillAmoutChange(billamout)}
+            keyboardType='numeric'
+          />
+        </View>
+        <View>
+          <Text>Tip Amout:</Text>
+        </View>
+        <View>
+          <SegmentedControlTab
+            values={this.segmentValue()}
+            selectedIndex={this.state.selectedIndex}
+            onTabPress={this.handleIndexChange}
+          />
+        </View>
+        <View>
+          <Text>Bill Amout: {this.state.billamout}</Text>
+          <Text>Tip Amout: {this.segmentValue()[this.selectedIndex]}</Text>
+          <Text>Percent Amout: {this.state.tipamout}</Text>
+        </View>
+        <View>
+          <Text>Result: {this.state.result}</Text>
+        </View>
+      </View>
     );
   }
 }

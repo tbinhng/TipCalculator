@@ -5,7 +5,7 @@ import Homescreen from './components/Homescreen/Homescreen';
 export const Homerouter = StackNavigator({
     HOME_SCREEN: {
         screen: Homescreen,
-        navigationOptions:{
+        navigationOptions: {
             title: 'TIP CALCULATOR',
         },
     },
