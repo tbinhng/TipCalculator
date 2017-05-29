@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { } from 'react-native';
 import { Homerouter } from './Router';
 
 class App extends Component {
