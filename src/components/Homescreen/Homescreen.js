@@ -1,111 +1,89 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { Text, View, StyleSheet, TextInput } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
-const styles = StyleSheet.create({
-  wrapper: {
-    flex: 1,
-    backgroundColor: 'yellow',
-  },
-  billamoutline: {
-    flexDirection: 'row',
-  },
-  texttitle: { flex: 2 },
-  billamoutinput: {},
-  resultsection: {
-  }
+var styles = StyleSheet.create({
+    wrapper: {
+        flex: 1,
+    },
 });
 
 class Homescreen extends Component {
-  constructor() {
-    super();
-    this.state = {
-      selectedIndex: 0,
-      text: '',
-      billamout: 0,
-      tipamout: 0,
-      result: 0,
-    };
-  }
-  handleIndexChange = (index) => {
-    this.setState({
-      selectedIndex: index,
-    });
-    this.handleBillAmoutChange(this.state.billamout, index);
-  }
-
-  handleBillAmoutChange = (bill, index) => {
-    this.setState({
-      billamout: bill,
-    });
-
-    bill = parseFloat(bill);
-    if (!index && index !== 0) {
-      index = this.selectedIndex;
+    constructor() {
+        super();
+        this.state = {
+            text: '',
+            selectedIndex: 0,
+            percent: 0.1,
+            resultBill: 0,
+        };
     }
-    console.log(index);
-    var percent = this.segmentValue()[index];
-    percent = parseFloat(percent) / 100;
-
-    var billresult = bill + (bill * percent);
-    if (!isNaN(percent)) {
-      this.setState({
-        result: billresult,
-        tipamout: percent,
-      });
+    handelCalculatorBill = (bill, percent) => {
+        percent = percent / 100;
+        var resultBill = bill + (bill * percent);
+        this.setState({
+            resultBill,
+            percent,
+        });
     }
-  }
 
-  segmentValue() {
-    return ['10%', '20%', '50%'];
-  }
+    handleIndexChange = (index) => {
+        this.setState({
+            selectedIndex: index,
+        }, () => this.handelCalculatorBill(
+            this.state.text,
+            parseFloat(this.segmentValue()[index])
+        ));
+    }
 
-  gotoSettingscreen() {
-    this.props.navigation.navigate('SETTING_SCREEN');
-  }
+    handelBillAmoutChange = (text) => {
+        this.setState({
+            text,
+        }, () => this.handelCalculatorBill(
+            text,
+            parseFloat(this.segmentValue()[this.state.selectedIndex])
+        ));
+    }
 
-  render() {
-    return (
-      <View style={styles.wrapper}>
-        <View style={styles.billamoutline}>
-          <Text style={styles.texttitle}>Bill Amout:</Text>
-          <TextInput
-            style={{ height: 40, flex: 8 }}
-            onChangeText={(billamout) => this.handleBillAmoutChange(billamout)}
-            keyboardType='numeric'
-          />
-        </View>
-        <View style={styles.resultsection}>
-          <View>
-            <Text>Tip Amout:</Text>
-          </View>
-          <View>
-            <SegmentedControlTab
-              values={this.segmentValue()}
-              selectedIndex={this.state.selectedIndex}
-              onTabPress={this.handleIndexChange}
-            />
-          </View>
-          <View>
-            <Text>Bill Amout: {this.state.billamout}</Text>
-            <Text>Tip Amout: {this.segmentValue()[this.state.selectedIndex]}</Text>
-            <Text>Percent Amout: {this.state.tipamout}</Text>
-          </View>
-          <View>
-            <Text>Result: {this.state.result}</Text>
-          </View>
-        </View>
-        <View style={{ flex: 1, justifyContent: 'center', alignContent: 'center' }}>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate('SETTING_SCREEN')}
-          >
-            <Text> Setting </Text>
-          </TouchableOpacity>
-        </View>
+    segmentValue() {
+        return ['10%', '20%', '50%'];
+    }
 
-      </View>
-    );
-  }
+    render() {
+        return (
+            <View style={styles.wrapper}>
+                <View style={{ flex: 1 }}>
+                    <View style={{ flex: 1, flexDirection: 'row' }} >
+                        <Text style={{ flex: 2 }} >Bill Amount: </Text>
+                        <TextInput
+                            style={{ flex: 8, height: 40 }}
+                            onChangeText={
+                                (text) => this.handelBillAmoutChange(parseFloat(text),
+                                    this.state.selectedIndex)
+                            }
+                            value={this.state.text}
+                            isFocused
+                            keyboardType='numeric'
+                        />
+                    </View>
+                </View>
+                <View style={{ flex: 1 }}>
+                    <Text>Tip Amount:</Text>
+                    <SegmentedControlTab
+                        values={this.segmentValue()}
+                        selectedIndex={this.state.selectedIndex}
+                        onTabPress={this.handleIndexChange}
+                    />
+                </View>
+                <View style={{ flex: 8 }}>
+                    <Text>Bill Amount: {this.state.text} </Text>
+                    <Text>Tip Amout: {this.segmentValue()[this.state.selectedIndex]}</Text>
+                    <Text>Percent: {this.state.percent} </Text>
+                    <Text style={{ fontWeight: 'bold' }} >Result: {this.state.resultBill}</Text>
+                </View>
+            </View>
+        );
+    }
 }
 
 export default Homescreen;

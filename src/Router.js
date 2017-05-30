@@ -7,19 +7,20 @@ import Settingscreen from './components/Settingscreen/Settingscreen';
 export const Homerouter = StackNavigator({
     HOME_SCREEN: {
         screen: Homescreen,
-        navigationOptions: {
+        navigationOptions: ({ navigation }) => ({
             title: 'TIP CALCULATOR',
             headerRight: <TouchableOpacity
-                onPress={() => this.props.navigation.navigate('SETTING_SCREEN')}
+                onPress={() => navigation.navigate('SETTING_SCREEN')}
             >
                 <Text>Setting</Text>
             </TouchableOpacity>
-        },
+        }),
     },
     SETTING_SCREEN: {
         screen: Settingscreen,
         navigationOptions: {
-            title: 'SETTING'
+            title: 'SETTING',
+
         },
     }
 });
