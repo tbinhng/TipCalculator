@@ -18,7 +18,7 @@ export const Homerouter = StackNavigator({
     SETTING_SCREEN: {
         screen: Settingscreen,
         navigationOptions: ({ navigation }) => ({
-            title: 'SETTING',
+            title: 'Setting Screen',
             headerRight: <Button
                 onPress={() => navigation.goBack()}
             />
