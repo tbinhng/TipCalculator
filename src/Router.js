@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { Text, TouchableOpacity } from 'react-native';
+import { Button } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import Homescreen from './components/Homescreen/Homescreen';
 import Settingscreen from './components/Settingscreen/Settingscreen';
@@ -9,18 +9,18 @@ export const Homerouter = StackNavigator({
         screen: Homescreen,
         navigationOptions: ({ navigation }) => ({
             title: 'TIP CALCULATOR',
-            headerRight: <TouchableOpacity
+            headerRight: <Button
                 onPress={() => navigation.navigate('SETTING_SCREEN')}
-            >
-                <Text>Setting</Text>
-            </TouchableOpacity>
+            />
         }),
     },
     SETTING_SCREEN: {
         screen: Settingscreen,
-        navigationOptions: {
+        navigationOptions: ({ navigation }) => ({
             title: 'SETTING',
-
-        },
+            headerRight: <Button
+                onPress={() => navigation.goBack()}
+            />
+        }),
     }
 });

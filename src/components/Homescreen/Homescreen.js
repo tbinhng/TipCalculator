@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, TextInput } from 'react-native';
 import SegmentedControlTab from 'react-native-segmented-control-tab';
 
-var styles = StyleSheet.create({
+const styles = StyleSheet.create({
     wrapper: {
         flex: 1,
     },
@@ -19,11 +19,11 @@ class Homescreen extends Component {
         };
     }
     handelCalculatorBill = (bill, percent) => {
-        percent = percent / 100;
-        var resultBill = bill + (bill * percent);
+        const percentAmount = percent / 100;
+        const resultBill = bill + (bill * percent);
         this.setState({
             resultBill,
-            percent,
+            percent: percentAmount,
         });
     }
 
