@@ -10,8 +10,9 @@ export const Homerouter = StackNavigator({
         navigationOptions: ({ navigation }) => ({
             title: 'TIP CALCULATOR',
             headerRight: <Button
+                title="Setting"
                 onPress={() => navigation.navigate('SETTING_SCREEN')}
-            />
+            />,
         }),
     },
     SETTING_SCREEN: {

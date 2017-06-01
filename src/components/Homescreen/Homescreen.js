@@ -77,8 +77,8 @@ class Homescreen extends Component {
                 </View>
                 <View style={{ flex: 8 }}>
                     <Text>Bill Amount: {this.state.text} </Text>
-                    <Text>Tip Amout: {this.segmentValue()[this.state.selectedIndex]}</Text>
-                    <Text>Percent: {this.state.percent} </Text>
+                    <Text>Tip Amout: {this.state.percent}</Text>
+                    <Text>Percent: {this.segmentValue()[this.state.selectedIndex]}</Text>
                     <Text style={{ fontWeight: 'bold' }} >Result: {this.state.resultBill}</Text>
                 </View>
             </View>

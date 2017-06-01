@@ -17,7 +17,7 @@ class Settingscreen extends Component {
         try {
             this.setSceneTransition(scene);
             this.setState({
-                scene: scene
+                scene
             });
         } catch (error) {
             console.log(`Oop!! Something went wrong !!!${error}`);
@@ -48,7 +48,7 @@ class Settingscreen extends Component {
 
     render() {
         return (
-            <View style={{ marginTop: 50, padding: 10 }}>
+            <View style={{ padding: 10 }}>
                 <View>
                     <Text style={{ fontSize: 25 }}>Scene Transitions</Text>
                     <Picker
